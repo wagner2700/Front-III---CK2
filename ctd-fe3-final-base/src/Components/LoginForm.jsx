@@ -20,6 +20,8 @@ const LoginForm = () => {
   const [email , setEmail] = useState("");
   const [password , setpassword] = useState("");
   const {saveData} = useContext(AuthContext)
+  const {saveTipoApi} = useContext(AuthContext)
+
   const navigate = useNavigate()
 
   async function logar(e){
@@ -29,6 +31,7 @@ const LoginForm = () => {
       const result = await api.post("/auth" , { username: email  , password : password})
         // Guardando o token por enquanto
         saveData(result.data.token)
+        saveTipoApi(result.data.tipo)
         navigate("/home")
     }catch(error){
       alert("Erro")
