@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children})=>{
 
     const [ name , setName] = useState("")
-
+    // função para manter status pós carregar apgina / Local Storage
     function saveData(data){
         setName(data)    
     }
