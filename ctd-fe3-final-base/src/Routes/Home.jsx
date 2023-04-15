@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import Card from "../Components/Card"
-import api from "../services/api";
 
 const Home = () => {
 

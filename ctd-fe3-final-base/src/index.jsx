@@ -7,6 +7,7 @@ import PaginaInicial from "./Routes/PaginaInicial";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginForm from "./Components/LoginForm"
 import AuthProvider from "./context/auth-context";
+import DetailCard from "./Components/DetailCard";
 
 
 
@@ -22,6 +23,7 @@ root.render(
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/home" element={ <PaginaInicial />} />
+        <Route path="/cadastroDentista" element={<DetailCard />} />
       </Routes>
      </BrowserRouter>
     </AuthProvider>
