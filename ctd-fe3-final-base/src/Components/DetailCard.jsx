@@ -14,6 +14,7 @@ const DetailCard = () => {
   const [nomeDentista, setNomeDentista] = useState("")
   const [sobreNomeDentista,setSobreNomeDentista]= useState("")
   const [usuarioDentista , setUsuarioDentista] = useState("")
+  
 
 
   
@@ -23,10 +24,11 @@ const DetailCard = () => {
       console.log(url)
 
       const response = await api.get(url)
-      console.log(response)
       setNomeDentista(response.data.nome)
       setSobreNomeDentista(response.data.sobrenome)
       setUsuarioDentista(response.data.usuario.username)
+
+      
     }catch{
       console.log("error")
     }
@@ -50,7 +52,7 @@ const DetailCard = () => {
     //substituídas com as informações que vem da api
     <>
       <h1>{matricula}</h1>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
+      <h1>Detail about Dentist {nomeDentista} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
