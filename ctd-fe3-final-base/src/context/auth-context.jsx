@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children})=>{
 
     const [ name , setName] = useState("")
+    const [dentistaNome , setDentistaNome] = useState("")
 
     useEffect(()=>{
         // Pega do Storage
@@ -26,11 +27,16 @@ const AuthProvider = ({children})=>{
         localStorage.setItem("@DataToken" , data)
     }
 
+    function saveDataDentista(nomeDentista){
+        setDentistaNome(nomeDentista)
+    }
+
+
     function saveTipoApi(tipo){
         localStorage.setItem("@DataTipo" , tipo)
     }
 
-    return  <AuthContext.Provider value={{name  , saveData , removeUserStorage , saveTipoApi}}>
+    return  <AuthContext.Provider value={{name  , saveData , removeUserStorage , saveTipoApi , saveDataDentista}}>
              {children}
             </AuthContext.Provider>
     

@@ -1,17 +1,55 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+import { useLocation } from "react-router-dom";
+import api from "../services/api";
+
+
+
+
 
 const DetailCard = () => {
+  const { state } = useLocation();
+  const { matricula } = state || {};
+  const [nomeDentista, setNomeDentista] = useState("")
+  const [sobreNomeDentista,setSobreNomeDentista]= useState("")
+  const [usuarioDentista , setUsuarioDentista] = useState("")
 
-  useEffect(() => {
+
+  
+  const url = "/dentista?matricula="+ matricula
+  async function getDentistaMatricula(matricula){
+    try{
+      console.log(url)
+
+      const response = await api.get(url)
+      console.log(response)
+      setNomeDentista(response.data.nome)
+      setSobreNomeDentista(response.data.sobrenome)
+      setUsuarioDentista(response.data.usuario.username)
+    }catch{
+      console.log("error")
+    }
+  
+  }
+   
+   useEffect((matricula) => {
     //Nesse useEffect, você vai fazer um fetch na api passando o 
     //id do dentista que está vindo do react-router e carregar os dados em algum estado
+    //const response = api.get("/dentista?matricula="+ {matricula})
+   
+    getDentistaMatricula()
+    
+    
+     
   }, []);
+
+
   return (
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
+      <h1>{matricula}</h1>
       <h1>Detail about Dentist {'Nome do Dentista'} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -28,12 +66,12 @@ const DetailCard = () => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {'Nome do Dentista'}</li>
+              <li className="list-group-item">Nome: {nomeDentista}</li>
               <li className="list-group-item">
-                Sobrenome: {'Sobrenome do Dentista'}
+                Sobrenome: {sobreNomeDentista}
               </li>
               <li className="list-group-item">
-                Usuário: {'Nome de usuário do Dentista'}
+                Usuário: {usuarioDentista}
               </li>
             </ul>
             <div className="text-center">
