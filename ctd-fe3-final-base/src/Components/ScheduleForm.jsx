@@ -10,6 +10,8 @@ const ScheduleForm = () => {
   const [selectpaciente , setSelectPaciente] = useState("")
   const [objetoMedico , setObjetoMedico] = useState("")
   const [objetoPaciente , setObjetoPaciente] = useState([])
+  const [data , setData] = useState("")
+ 
 
 
  
@@ -53,6 +55,10 @@ const ScheduleForm = () => {
   async function marcarConsulta(matricula , matriculaPaciente){
     console.log(matricula)
     console.log(matriculaPaciente)
+    const token = localStorage.getItem("@DataToken" )
+   
+   
+
     try{
       //{dentista.map((item)=>(item.matricula = selectMedico? )} 
       const resultadoMedico = dentista.filter((item)=>item.matricula === matricula )
@@ -101,8 +107,10 @@ const ScheduleForm = () => {
             "username": resultadoPaciente[0].usuario.username
           }
         },
-        "dataHoraAgendamento": "2023-04-16T18:00:34.866Z",
-        //"Authorization" : localStorage.getItem("@DataToken")
+        "dataHoraAgendamento": data,
+        
+      },{ headers: {
+        'Authorization' : `Bearer ${token}` }
       })
     }catch{
       console.log("Erro marcar consulta")
@@ -159,6 +167,7 @@ const ScheduleForm = () => {
                 id="appointmentDate"
                 name="appointmentDate"
                 type="datetime-local"
+                onChange={(event)=>setData(event.target.value)}
               />
             </div>
           </div>
@@ -173,9 +182,10 @@ const ScheduleForm = () => {
               Schedule
             </button>
           </div>
+          
         </form>
 
-        <h1>{objetoMedico}</h1>
+        
       </div>
     </>
   );
