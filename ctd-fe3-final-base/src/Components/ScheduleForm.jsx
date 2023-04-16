@@ -59,10 +59,12 @@ const ScheduleForm = () => {
       const resultadoPaciente = paciente.filter((item)=>item.matricula === matriculaPaciente )
 
       console.log(resultadoMedico )
+      console.log(resultadoPaciente )
 
 
 
-      console.log(resultadoPaciente)
+      console.log(resultadoMedico[0].nome)
+     console.log(resultadoPaciente[0].nome)
 
       setObjetoMedico(resultadoMedico)
       setObjetoPaciente(resultadoPaciente)
@@ -71,36 +73,36 @@ const ScheduleForm = () => {
 
       const response =  api.post("/consulta" , {
         "paciente": {
-          "nome":resultadoPaciente.nome ,
-          "sobrenome": resultadoPaciente.sobrenome,
-          "matricula": resultadoPaciente.matricula,
+          "nome":resultadoPaciente[0].nome ,
+          "sobrenome": resultadoPaciente[0].sobrenome,
+          "matricula": resultadoPaciente[0].matricula,
           "usuario": {
-            "username": resultadoPaciente.username
+            "username": resultadoPaciente[0].usuario.username
           },
           "endereco": {
-            "id": resultadoPaciente.endereco.id,
-            "logradouro": resultadoPaciente.endereco.logradouro,
-            "numero": resultadoPaciente.endereco.numero,
-            "complemento": resultadoPaciente.endereco.complemento,
-            "bairro": resultadoPaciente.endereco.bairro,
-            "municipio": resultadoPaciente.endereco.municipio,
-            "estado":resultadoPaciente.endereco.estado,
-            "cep": resultadoPaciente.endereco.cep,
-            "pais": resultadoPaciente.endereco.pais,
+            "id": resultadoPaciente[0].endereco.id,
+            "logradouro": resultadoPaciente[0].endereco.logradouro,
+            "numero": resultadoPaciente[0].endereco.numero,
+            "complemento": resultadoPaciente[0].endereco.complemento,
+            "bairro": resultadoPaciente[0].endereco.bairro,
+            "municipio": resultadoPaciente[0].endereco.municipio,
+            "estado":resultadoPaciente[0].endereco.estado,
+            "cep": resultadoPaciente[0].endereco.cep,
+            "pais": resultadoPaciente[0].endereco.pais,
            
           },
-          "dataDeCadastro": resultadoPaciente.dataDeCadastro
+          "dataDeCadastro": resultadoPaciente[0].dataDeCadastro
         },
         "dentista": {
-          "nome": objetoMedico.nome,
-          "sobrenome": objetoMedico.sobrenome,
-          "matricula": objetoMedico.matricula,
+          "nome": objetoMedico[0].nome,
+          "sobrenome": objetoMedico[0].sobrenome,
+          "matricula": objetoMedico[0].matricula,
           "usuario": {
-            "username": resultadoPaciente.username
+            "username": resultadoPaciente[0].usuario.username
           }
         },
         "dataHoraAgendamento": "2023-04-16T18:00:34.866Z",
-        "Authorization" : localStorage.getItem("@DataToken")
+        //"Authorization" : localStorage.getItem("@DataToken")
       })
     }catch{
       console.log("Erro marcar consulta")
