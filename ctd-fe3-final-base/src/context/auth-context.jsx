@@ -1,45 +1,57 @@
-import { createContext, useEffect, useState } from "react"
-
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext({});
 
+const AuthProvider = ({ children }) => {
+  const [name, setName] = useState("");
+  const [dentistaNome, setDentistaNome] = useState("");
+  const [darkTheme, setDarkTheme] = useState(false);
 
-const AuthProvider = ({children})=>{
+  useEffect(() => {
+    // Pega do Storage
+    const response = localStorage.getItem("@DataToken");
+    setName(response);
+  }, []);
 
-    const [ name , setName] = useState("")
-    const [dentistaNome , setDentistaNome] = useState("")
+  function removeUserStorage() {
+    localStorage.removeItem("@DataToken");
+    localStorage.removeItem("@DataTipo");
+  }
 
-    useEffect(()=>{
-        // Pega do Storage
-        const response = localStorage.getItem("@DataToken")
-        setName(response)
-    },[])
+  // função para manter status pós carregar apgina / Local Storage
+  function saveData(data) {
+    setName(data);
+    //Salva no Storage
+    localStorage.setItem("@DataToken", data);
+  }
 
-    function removeUserStorage(){
-        localStorage.removeItem("@DataToken")
-        localStorage.removeItem("@DataTipo")    
-    }
+  function saveDataDentista(nomeDentista) {
+    setDentistaNome(nomeDentista);
+  }
 
-    // função para manter status pós carregar apgina / Local Storage
-    function saveData(data){
-        setName(data)    
-        //Salva no Storage
-        localStorage.setItem("@DataToken" , data)
-    }
+  function saveTipoApi(tipo) {
+    localStorage.setItem("@DataTipo", tipo);
+  }
 
-    function saveDataDentista(nomeDentista){
-        setDentistaNome(nomeDentista)
-    }
+  function toggleTheme() {
+    setDarkTheme(!darkTheme);
+  }
 
+  return (
+    <AuthContext.Provider
+      value={{
+        name,
+        saveData,
+        removeUserStorage,
+        saveTipoApi,
+        saveDataDentista,
+        darkTheme,
+        toggleTheme,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-    function saveTipoApi(tipo){
-        localStorage.setItem("@DataTipo" , tipo)
-    }
-
-    return  <AuthContext.Provider value={{name  , saveData , removeUserStorage , saveTipoApi , saveDataDentista}}>
-             {children}
-            </AuthContext.Provider>
-    
-}
-
-export default AuthProvider ; 
+export default AuthProvider;
