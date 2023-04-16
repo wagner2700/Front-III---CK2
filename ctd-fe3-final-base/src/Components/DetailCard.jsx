@@ -21,9 +21,7 @@ const DetailCard = () => {
   const url = "/dentista?matricula="+ matricula
   async function getDentistaMatricula(matricula){
     try{
-      console.log(url)
-
-      const response = await api.get(url)
+            const response = await api.get(url)
       setNomeDentista(response.data.nome)
       setSobreNomeDentista(response.data.sobrenome)
       setUsuarioDentista(response.data.usuario.username)
@@ -51,7 +49,6 @@ const DetailCard = () => {
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
-      <h1>{matricula}</h1>
       <h1>Detail about Dentist {nomeDentista} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação

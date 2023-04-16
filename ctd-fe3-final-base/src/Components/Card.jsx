@@ -11,7 +11,6 @@ const Card = () => {
     try{
       const response = await api.get("/dentista")
       setDentista(response.data)
-      console.log(response.data)
     }catch(error){
       console.log(error)
     }
@@ -24,7 +23,6 @@ const Card = () => {
   }, []);
 
   function dataDentista(matricula){
-    alert(matricula)
     navigate("/cadastroDentista", { state: { matricula } } )
   }
 
