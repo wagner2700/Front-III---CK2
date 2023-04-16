@@ -21,6 +21,7 @@ h1{
   padding: 2rem 0;
 }
 
+
 .navbar-nav{
   align-items: center;
 }
@@ -48,9 +49,7 @@ form{
   margin: 0 auto;
 }
 
-.btn-light{
-  background-color: rgb(214, 214, 214);
-}
+
 
 .card-grid{
   display: grid;
@@ -88,7 +87,7 @@ tr:nth-child(even) {
 }
 
 .dark h5{
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 @media(min-width: 786px) and (max-width: 1065px){
@@ -107,4 +106,16 @@ tr:nth-child(even) {
   .card-grid{
     grid-template-columns: 1fr;
   }
+}
+
+.dark footer {
+  background-color: #212529;
+}
+
+.dark .card {
+  background-color: #4D4D4D;
+}
+
+.dark #root {
+  background-color: #68686896;
 }
